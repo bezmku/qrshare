@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Offline file trasfer'),
+            const Text('Offline file transfer'),
             const SizedBox(height: 24),
             ElevatedButton.icon(
               onPressed: () {
@@ -25,6 +25,7 @@ class HomeScreen extends StatelessWidget {
               icon: const Icon(Icons.upload),
               label: const Text('Send files'),
             ),
+            const SizedBox(height: 24),
             ElevatedButton.icon(
               onPressed: () {
                 Navigator.push(
@@ -32,7 +33,7 @@ class HomeScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => ReceiveScreen()),
                 );
               },
-              icon: const Icon(Icons.upload),
+              icon: const Icon(Icons.download),
               label: const Text('Receive files'),
             ),
           ],
