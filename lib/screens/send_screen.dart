@@ -78,7 +78,7 @@ class _SendScreenState extends State<SendScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const SessionScreen(),
+                          builder: (context) => SessionScreen(files: _files),
                         ),
                       );
                     },
