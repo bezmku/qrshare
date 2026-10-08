@@ -1,5 +1,6 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:qrshare/screens/session_screen.dart';
 
 class SendScreen extends StatefulWidget {
   const SendScreen({super.key});
@@ -61,10 +62,31 @@ class _SendScreenState extends State<SendScreen> {
           ),
           Padding(
             padding: const EdgeInsets.all(16),
-            child: ElevatedButton.icon(
-              onPressed: _pickFiles,
-              icon: const Icon(Icons.add),
-              label: const Text('Select files'),
+            child: Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: _pickFiles,
+                    icon: const Icon(Icons.add),
+                    label: const Text('Select files'),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SessionScreen(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.qr_code),
+                    label: const Text('Start session'),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
