@@ -39,6 +39,7 @@ dependencies:
   qr_flutter: ^4.1.0
   mobile_scanner: ^7.4.2
   crypto: ^3.0.7
+  permission_handler: ^13.0.2
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +51,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -92,3 +94,14 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+dependency_overrides:
+  permission_handler_android: 12.0.13
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/icon/icon.png"
+  min_sdk_android: 21
+  adaptive_icon_background: "#03313A"
+  adaptive_icon_foreground: "assets/icon/icon.png"
