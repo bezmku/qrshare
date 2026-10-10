@@ -11,12 +11,20 @@ class TransferServer {
 
   final List<PlatformFile> files;
   void Function(int sent, int total)? onProgress;
+  void Function()? onConnected;
+  Socket? _socket;
 
   Future<ServerSocket> bind() =>
       ServerSocket.bind(InternetAddress.anyIPv4, kPort);
 
+  void cancel() {
+    _socket?.destroy();
+  }
+
   Future<void> serve(ServerSocket server, String sessionId) async {
     final socket = await server.first;
+    _socket = socket;
+    onConnected?.call();
     final io = FramedProtocol(socket);
     try {
       final (type, payload) = await io.nextFrame();
@@ -81,6 +89,7 @@ class TransferServer {
     } finally {
       io.close();
       server.close();
+      _socket = null;
     }
   }
 }

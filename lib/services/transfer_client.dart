@@ -6,6 +6,12 @@ import 'package:crypto/crypto.dart';
 import 'protocol.dart';
 
 class TransferClient {
+  Socket? _socket;
+
+  void cancel() {
+    _socket?.destroy();
+  }
+
   Future<Map<String, dynamic>> receive({
     required String host,
     required String sessionId,
@@ -17,6 +23,7 @@ class TransferClient {
       kPort,
       timeout: const Duration(seconds: 15),
     );
+    _socket = socket;
     final io = FramedProtocol(socket);
     try {
       io.sendJson(frameHello, {'v': kVersion, 'sid': sessionId});
@@ -39,8 +46,7 @@ class TransferClient {
       final total = manifest.fold<int>(0, (sum, f) => sum + (f['size'] as int));
       final done = <Map<String, dynamic>>[];
 
-      for (final rawEntry in manifest) {
-        final entry = rawEntry as Map<String, dynamic>;
+      for (var i = 0; i < manifest.length; i++) {
         final (startType, startPayload) = await io.nextFrame();
         if (startType != frameFileStart) {
           throw const FormatException('Expected FILE_START');
@@ -85,7 +91,7 @@ class TransferClient {
 
           await out.close();
           await File(partPath).rename('$saveDir/$name');
-          done.add({'name': name, 'size': size});
+          done.add({'name': name, 'size': size, 'path': '$saveDir/$name'});
           io.sendJson(frameAck, {'name': name, 'ok': true});
         } catch (e) {
           await out.close();
@@ -104,6 +110,7 @@ class TransferClient {
       return {'files': done, 'totalBytes': total};
     } finally {
       io.close();
+      _socket = null;
     }
   }
 }
