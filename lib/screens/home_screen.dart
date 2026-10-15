@@ -26,8 +26,11 @@ class HomeScreen extends StatelessWidget {
                       color: kColorAccent,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const Icon(Icons.qr_code_2_rounded,
-                        color: kColorBg, size: 28),
+                    child: const Icon(
+                      Icons.qr_code_2_rounded,
+                      color: kColorBg,
+                      size: 28,
+                    ),
                   ),
                   const SizedBox(width: 12),
                   const Text(
@@ -56,10 +59,8 @@ class HomeScreen extends StatelessWidget {
                 icon: Icons.upload_rounded,
                 title: 'Send files',
                 subtitle: 'Create a hotspot & share your QR code',
-                onTap: () => Navigator.push(
-                  context,
-                  _slideRoute(const SendScreen()),
-                ),
+                onTap: () =>
+                    Navigator.push(context, _slideRoute(const SendScreen())),
               ),
               const SizedBox(height: 16),
               // Receive card
@@ -67,15 +68,13 @@ class HomeScreen extends StatelessWidget {
                 icon: Icons.download_rounded,
                 title: 'Receive files',
                 subtitle: 'Scan the sender\'s QR code to connect',
-                onTap: () => Navigator.push(
-                  context,
-                  _slideRoute(const ReceiveScreen()),
-                ),
+                onTap: () =>
+                    Navigator.push(context, _slideRoute(const ReceiveScreen())),
               ),
               const SizedBox(height: 48),
               Center(
                 child: Text(
-                  'No internet required • End-to-end verified',
+                  'No internet required • End-to-end ',
                   style: TextStyle(
                     color: kColorTextMuted.withValues(alpha: 0.6),
                     fontSize: 12,
@@ -96,10 +95,10 @@ class HomeScreen extends StatelessWidget {
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return SlideTransition(
-          position: Tween<Offset>(
-            begin: const Offset(1, 0),
-            end: Offset.zero,
-          ).animate(CurvedAnimation(parent: animation, curve: Curves.easeOutCubic)),
+          position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero)
+              .animate(
+                CurvedAnimation(parent: animation, curve: Curves.easeOutCubic),
+              ),
           child: child,
         );
       },
@@ -178,10 +177,7 @@ class _ModeCardState extends State<_ModeCard> {
                     const SizedBox(height: 4),
                     Text(
                       widget.subtitle,
-                      style: TextStyle(
-                        color: kColorTextMuted,
-                        fontSize: 13,
-                      ),
+                      style: TextStyle(color: kColorTextMuted, fontSize: 13),
                     ),
                   ],
                 ),
