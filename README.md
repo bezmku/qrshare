@@ -1,5 +1,7 @@
 # qrshare
 
+> **Author:** Beza Mitiku &nbsp;|&nbsp; **ID:** CTC-812-16 &nbsp;|&nbsp; **Stream:** Development
+
 qrshare is an Android app that sends files straight from one phone to another
 without the internet. There is no server in the middle and nothing to sign up
 for. One phone turns itself into a small local Wi-Fi hotspot, the other phone
